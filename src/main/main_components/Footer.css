@@ -1,0 +1,151 @@
+/* Footer.css */
+.footer-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.footer-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* Let clicks pass through to the content */
+}
+
+.footer-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 0 20px;
+}
+
+/* Center Section */
+.center-section {
+  text-align: center;
+  margin-bottom: 60px; /* Space between center content and bottom bar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-title {
+  font-size: 5rem; /* Huge text */
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -2px;
+  line-height: 1.1;
+}
+
+.footer-email {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin: 10px 0 40px 0;
+  font-weight: 400;
+}
+
+.contact-btn {
+  background-color: white;
+  color: black;
+  padding: 14px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+}
+
+.contact-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+}
+
+/* Bottom Bar */
+.bottom-bar {
+  position: absolute;
+  bottom: 60px; /* Distance from bottom of screen */
+  left: 0;
+  width: 100%;
+  padding: 0 10%; /* Indentation from sides */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Left Side: Links */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.links-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.social-icons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #888; /* Grey text for links */
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 1rem;
+}
+
+.social-item:hover {
+  color: #ffffff;
+}
+
+.social-icon {
+  color: white; /* Icons stay white */
+}
+
+/* Right Side: Copyright Text */
+.copyright-text {
+  max-width: 450px;
+  text-align: left;
+  font-size: 1rem;
+  color: #888; /* Grey text */
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-title { font-size: 3rem; }
+  .bottom-bar {
+    position: relative;
+    bottom: auto;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 20px;
+    margin-top: 40px;
+  }
+  .copyright-text {
+    max-width: 100%;
+  }
+}

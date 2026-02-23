@@ -1,0 +1,96 @@
+/* src/main/main_components/NavButtons.css */
+
+.nav-group {
+  display: flex;
+  align-items: center;
+  gap: 4rem; /* Spacing between ABOUT, SKILLS, PROJECTS */
+  font-family: 'Space Mono', monospace;
+  z-index: 50;
+}
+
+/* --- COMMON LINK STYLES --- */
+.nav-item {
+  position: relative;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: #888; /* Default Grey */
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.nav-item:hover, 
+.nav-item.active {
+  color: #FFF; /* White on Hover */
+}
+
+/* Red underline effect on hover */
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #EE344A; /* Theme Red */
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/* --- DROPDOWN SPECIFIC STYLES --- */
+.dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -20px; /* Align slightly left */
+  min-width: 180px;
+  background: rgba(10, 10, 10, 0.95);
+  border: 1px solid #333;
+  padding: 5px 0;
+  
+  display: flex;
+  flex-direction: column;
+  
+  /* Hidden State */
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-dropdown.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-link {
+  color: #BBB;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #222;
+  transition: all 0.2s ease;
+  display: block;
+  text-transform: lowercase; /* ".know me" style */
+}
+
+.dropdown-link:last-child {
+  border-bottom: none;
+}
+
+.dropdown-link:hover {
+  background: #EE344A;
+  color: #FFF;
+  padding-left: 25px; /* Slide effect */
+}

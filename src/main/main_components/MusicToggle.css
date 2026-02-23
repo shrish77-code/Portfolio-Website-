@@ -1,0 +1,108 @@
+/* src/main/main_components/MusicToggle.css */
+
+.music-container {
+  display: flex;
+  align-items: center; /* Locks vertical alignment */
+  gap: 16px;
+  /* Fixed dimensions to prevent layout shifts */
+  height: 40px; 
+  margin-left: auto;
+  /* Optional: Ensure it doesn't wrap on small screens */
+  white-space: nowrap;
+}
+
+/* The Label Text ("MUSIC ON/OFF") */
+.music-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #EE344A;
+  
+  /* CRITICAL FIX: Fixed width prevents horizontal layout shift */
+  width: 80px; 
+  text-align: right; 
+}
+
+/* --- NEW SWITCH CSS (Adapted for Red/Black Theme) --- */
+.switch {
+  /* Variables */
+  --switch_width: 2.5em; /* Slightly wider for the pill shape */
+  --switch_height: 1.25em; /* Slightly taller */
+  
+  /* Theme Colors */
+  --thumb_color:  white;      /* Red Knob */
+  --track_color: red ;      /* Black Track */
+  --track_active_color: white;  /* Dark Grey when active */
+  --outline_color: black;    /* White Border */
+
+  font-size: 13px; /* Controls the overall size of the button */
+  position: relative;
+  display: inline-block;
+  width: var(--switch_width);
+  height: var(--switch_height);
+  flex-shrink: 0; /* Prevents button from squishing */
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  box-sizing: border-box;
+  border: 2px solid var(--outline_color);
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--track_color);
+  transition: .15s;
+  border-radius: var(--switch_height); /* Rounded Pill Shape */
+}
+
+/* The Knob */
+.slider:before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  height: var(--switch_height);
+  width: var(--switch_height);
+  border: 2px solid var(--outline_color);
+  border-radius: 100%; /* Circle Shape */
+  left: -2px;
+  bottom: -2px;
+  background-color: var(--thumb_color);
+  transform: translateY(-0.2em);
+  box-shadow: 0 0.2em 0 var(--outline_color);
+  transition: .15s;
+}
+
+input:checked + .slider {
+  background-color: var(--track_active_color);
+}
+
+input:focus-visible + .slider {
+  box-shadow: 0 0 0 2px var(--track_active_color);
+}
+
+/* Raise thumb when hovered */
+input:hover + .slider:before {
+  transform: translateY(-0.3em);
+  box-shadow: 0 0.3em 0 var(--outline_color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.2em);
+}
+
+/* Raise thumb when hovered & checked */
+input:hover:checked + .slider:before {
+  transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.3em);
+  box-shadow: 0 0.3em 0 var(--outline_color);
+}

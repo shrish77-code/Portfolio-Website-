@@ -1,0 +1,83 @@
+/* src/main/main_components/ContactButton.css */
+
+.btn-glitch {
+  display: inline-block;
+  font-family: 'Space Mono', monospace; /* Theme Font */
+  font-size: 0.9rem;
+  border: 1px solid #FFFFFF; /* White Border */
+  color: #FFFFFF;            /* White Text */
+  padding: 12px 20px;
+  min-width: 175px;
+  line-height: 1.5em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 15px; /* Sharp corners for Tech feel (or 15px if you prefer round) */
+  background: transparent;
+  transition: all 0.2s;
+  text-decoration: none; /* Removes underline from <a> */
+  margin-top: 2rem; /* Spacing from the image */
+}
+
+.btn-glitch .text,
+.btn-glitch .decoration {
+  display: inline-block;
+}
+
+.btn-glitch .decoration {
+  float: right;
+}
+
+/* --- HOVER STATE --- */
+.btn-glitch:hover,
+.btn-glitch:focus {
+  animation-name: glitch-anim;
+  animation-duration: 0.2s;
+  background-color: #EE344A; /* Theme Red */
+  color: #FFFFFF;
+  border: 1px solid #EE344A;
+}
+
+.btn-glitch:hover .text-decoration,
+.btn-glitch:hover .decoration {
+  animation-name: blink-anim;
+  animation-duration: 0.1s;
+  animation-iteration-count: infinite;
+}
+
+/* --- ACTIVE STATE --- */
+.btn-glitch:active {
+  background: none;
+  color: #EE344A;
+  border-color: #EE344A;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes glitch-anim {
+  25% {
+    background-color: #EE344A;
+    transform: translateX(-5px);
+    letter-spacing: 5px;
+  }
+  35% {
+    background-color: #FFF; /* Flash White */
+    color: #000;
+    transform: translate(5px);
+  }
+  59% {
+    opacity: 0;
+  }
+  60% {
+    background-color: #EE344A;
+    transform: translate(-5px);
+    filter: blur(2px);
+  }
+  100% {
+    background-color: #EE344A;
+    blur: (2px);
+  }
+}
+
+@keyframes blink-anim {
+  50% { opacity: 0; }
+}

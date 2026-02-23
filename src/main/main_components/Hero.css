@@ -1,0 +1,370 @@
+/* src/main/main_components/Hero.css */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+:root {
+  --primary: #EE344A;
+  --bg: #000000;
+  --text: #FFFFFF;
+  --text-dim: #888888;
+  --border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Layout Containers --- */
+.hero-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg);
+  overflow: hidden;
+  color: var(--text);
+  font-family: 'Space Mono', monospace; /* Default to the tech look */
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 4rem;
+  pointer-events: none;
+}
+.hero-header, 
+.hero-grid, 
+.hero-bottom {
+  pointer-events: auto; /* Makes buttons and text clickable again */
+}
+.hero-headline {
+  pointer-events: auto;
+}
+/* --- Header Section --- */
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.logo-box {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.logo-text h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.logo-sub {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.hero-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
+}
+
+.hero-nav li {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.hero-nav li:hover {
+  color: var(--primary);
+}
+
+/* --- Middle Grid Section --- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  align-items: center;
+  margin: auto 0; /* Vertically center in available space */
+}
+
+.grid-label {
+  grid-column: span 2;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Play Button Area */
+.grid-play {
+  grid-column: span 3;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.play-icon-box {
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease;
+}
+
+.grid-play:hover .play-icon-box {
+  border-color: var(--primary);
+}
+
+.play-triangle {
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 10px solid var(--primary);
+  margin-left: 4px;
+}
+
+.play-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.7);
+}
+
+.grid-play:hover .play-text {
+  color: var(--primary);
+}
+
+/* Description Text */
+.grid-desc {
+  grid-column: 9 / span 4; /* Start at col 9, span 4 */
+}
+
+.grid-desc h3 {
+  color: var(--primary);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.grid-desc p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* --- Bottom Section (Big Text) --- */
+.hero-headline {
+  font-size: 5rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.outline-text {
+  /* The "Hollow" text effect */
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+}
+
+.hero-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.highlight {
+  color: var(--primary);
+  cursor: pointer;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 1.5rem;
+  }
+  
+  .hero-headline {
+    font-size: 2.5rem;
+  }
+  
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .hero-nav {
+    display: none; /* Hide nav on small screens for simplicity */
+  }
+}
+/* src/main/main_components/Hero.css */
+
+/* --- 1. NAVIGATION ANIMATION (Top to Bottom) --- */
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* We will apply this to the LIs in the JSX */
+.anim-nav {
+  opacity: 0; /* Hidden by default */
+  animation: slideDownFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* --- 2. TEXT REVEAL (The White Block Effect) --- */
+/* The parent container for the text */
+.reveal-container {
+  position: relative;
+  display: block; /* Ensures it takes up space */
+  overflow: hidden; /* Clips the block when it moves out */
+  width: fit-content; /* Only wrap the text width */
+}
+
+/* The actual text (initially hidden) */
+.reveal-content {
+  opacity: 0;
+  animation: textAppear 0.1s linear forwards;
+  animation-delay: 0.5s; /* Wait for the block to cover it */
+}
+
+/* The White Block (The Curtain) */
+.reveal-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF; /* The "Big White Row" */
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 20;
+  animation: blockSwipe 1.2s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+  animation-delay: 0.1s;
+}
+
+/* Animation Logic */
+@keyframes blockSwipe {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  45% {
+    transform: scaleX(1);
+    transform-origin: left; /* Grows from left */
+  }
+  55% {
+    transform: scaleX(1);
+    transform-origin: right; /* Switches anchor to right */
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right; /* Shrinks to right */
+  }
+}
+
+@keyframes textAppear {
+  to {
+    opacity: 1;
+  }
+}
+/* src/main/main_components/Hero.css */
+
+/* ... (Keep your existing animations like slideDownFade, reveal-block, etc.) ... */
+
+/* --- NEW: HOVER PIXEL EFFECT --- */
+.nav-link {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0px; /* Start with no gap */
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* The Square Pixel (Hidden by default) */
+.nav-link::before {
+  content: "";
+  display: block;
+  width: 6px; 
+  height: 6px;
+  background-color: var(--primary); /* Uses your red accent, or use #FFF for white */
+  opacity: 0;
+  transform: translateX(-10px); /* Start slightly left */
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  margin-right: 0px; 
+}
+
+/* Hover State */
+.nav-link:hover {
+  color: #FFFFFF; /* Ensure text stays white */
+  gap: 12px; /* Push text to the right */
+}
+
+.nav-link:hover::before {
+  opacity: 1;
+  transform: translateX(0); /* Slide into place */
+}
+.hero-headline {
+  /* UPDATE 1: Set the new font for the main container */
+  font-family: 'Clash Display', sans-serif; 
+  font-weight: 450; /* Makes it nice and bold */
+  font-size: 5rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em; /* Clash Display looks great with slight spacing */
+}
+/* UPDATE 2: Force the "Creativity" text to keep the Tech/Pixel look */
+.outline-text {
+  font-family: 'Space Mono', monospace; /* Keeps the robotic contrast */
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+  font-weight: 700; /* Ensure the outline is thick enough */
+}

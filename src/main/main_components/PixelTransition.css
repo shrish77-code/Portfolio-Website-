@@ -1,0 +1,43 @@
+/* src/main/main_components/PixelTransition.css */
+
+.pixelated-image-card {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* Keeps corners clean */
+}
+
+/* Base styles for layers */
+.pixelated-image-card__default,
+.pixelated-image-card__active,
+.pixelated-image-card__pixels {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.1s ease; /* Tiny transition prevents flicker */
+}
+
+/* The Active Red Box Layer */
+.pixelated-image-card__active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EE344A; /* Your Red Theme */
+  /* Remove 'display: none' here so React can control opacity instead */
+}
+
+.pixelated-image-card__pixels {
+  pointer-events: none;
+  z-index: 10; /* Pixels always on top during animation */
+}
+
+.pixelated-image-card__pixel {
+  display: none;
+  position: absolute;
+  image-rendering: pixelated; 
+}

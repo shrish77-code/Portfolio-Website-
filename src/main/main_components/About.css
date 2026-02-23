@@ -1,0 +1,114 @@
+/* src/main/main_components/About.css */
+
+.about-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.about-canvas {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1; opacity: 0.6; pointer-events: none;
+}
+.about-fullscreen-text {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10; opacity: 0; pointer-events: none;
+}
+.about-fullscreen-text h2 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 5vw; color: #FFF;
+}
+
+/* SPLIT LAYOUT WRAPPER */
+.about-content-wrapper {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem; 
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* LEFT SIDE (Text) */
+.about-left {
+  flex: 1;
+  max-width: 600px;
+}
+
+/* RIGHT SIDE (Image Container) */
+.about-right {
+  flex: 1;
+  /* UPDATE: Narrower max-width to emphasize verticality */
+  max-width: 450px; 
+  height: auto;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center; /* Center the image block */
+  align-items: center;
+}
+
+/* TYPOGRAPHY */
+.about-label {
+  font-family: 'Space Mono', monospace;
+  color: #EE344A;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.about-headline {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #FFFFFF;
+}
+
+.about-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  color: #CCCCCC;
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.4); 
+  padding: 20px;
+  border-left: 2px solid #EE344A;
+  backdrop-filter: blur(4px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-content-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 2rem 2rem; /* More padding top for mobile */
+    text-align: center;
+    gap: 2rem;
+  }
+  .about-left, .about-right {
+    max-width: 100%;
+    width: 100%;
+  }
+  .about-right {
+    margin-top: 0;
+    /* On mobile, let it be a bit shorter so it fits screen */
+    height: 400px; 
+  }
+  .about-headline {
+    font-size: 2.5rem;
+  }
+}
