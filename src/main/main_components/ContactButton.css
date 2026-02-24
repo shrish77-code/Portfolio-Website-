@@ -89,11 +89,14 @@
 /* --- MOBILE FIXES --- */
 @media screen and (max-width: 768px) {
   .btn-glitch {
-    display: table; /* Helps with centering fit-content elements */
-    margin: 1.5rem auto; /* Center horizontally and adjust top spacing */
+    display: table;
+    margin: 1.5rem auto; 
+    
+    /* ADDED: Push the dragon/footer down to clear visual space */
+    margin-bottom: 4rem; 
+    
     left: 0;
     right: 0;
-    /* Ensure it doesn't overflow small screens */
     max-width: 90%;
     text-align: center;
   }
