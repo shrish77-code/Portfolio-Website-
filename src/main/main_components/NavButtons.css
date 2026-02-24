@@ -3,9 +3,13 @@
 .nav-group {
   display: flex;
   align-items: center;
-  gap: 4rem; /* Spacing between ABOUT, SKILLS, PROJECTS */
+  gap: 4rem; 
   font-family: 'Space Mono', monospace;
+  
+  /* FIXED: Essential for z-index to work */
+  position: relative; 
   z-index: 50;
+  pointer-events: auto; /* Ensures clicks pass through */
 }
 
 /* --- COMMON LINK STYLES --- */
@@ -13,7 +17,7 @@
   position: relative;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
-  color: #888; /* Default Grey */
+  color: #888; 
   text-decoration: none;
   cursor: pointer;
   background: none;
@@ -25,10 +29,10 @@
 
 .nav-item:hover, 
 .nav-item.active {
-  color: #FFF; /* White on Hover */
+  color: #FFF; 
 }
 
-/* Red underline effect on hover */
+/* Red underline effect */
 .nav-item::after {
   content: '';
   position: absolute;
@@ -36,7 +40,7 @@
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: #EE344A; /* Theme Red */
+  background-color: #EE344A; 
   transition: width 0.3s ease;
 }
 
@@ -52,7 +56,7 @@
 .nav-dropdown {
   position: absolute;
   top: 100%;
-  left: -20px; /* Align slightly left */
+  left: -20px; 
   min-width: 180px;
   background: rgba(10, 10, 10, 0.95);
   border: 1px solid #333;
@@ -82,7 +86,7 @@
   border-bottom: 1px solid #222;
   transition: all 0.2s ease;
   display: block;
-  text-transform: lowercase; /* ".know me" style */
+  text-transform: lowercase; 
 }
 
 .dropdown-link:last-child {
@@ -92,5 +96,14 @@
 .dropdown-link:hover {
   background: #EE344A;
   color: #FFF;
-  padding-left: 25px; /* Slide effect */
+  padding-left: 25px; 
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+  .nav-group {
+    gap: 1.5rem; /* Reduce gap so buttons don't fall off screen */
+    justify-content: center;
+    width: 100%;
+  }
 }
