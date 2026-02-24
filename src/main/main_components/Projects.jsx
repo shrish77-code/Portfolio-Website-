@@ -10,7 +10,7 @@ const projects = [
   { id: 4, label: "// JARVIS ASSISTANT", video: "/jarvis.mp4" },
 ];
 
-const marqueeText = "FULL-STACK SOLUTIONS FROM CONCEPT TO DEPLOYMENT • ";
+const marqueeText = "FULL-STACK SOLUTIONS • CONCEPT TO DEPLOYMENT • ENGINEERED FOR PERFORMANCE • ";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);

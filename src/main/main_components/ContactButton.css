@@ -12,11 +12,15 @@
   white-space: nowrap;
   text-transform: uppercase;
   cursor: pointer;
-  border-radius: 15px; /* Sharp corners for Tech feel (or 15px if you prefer round) */
+  border-radius: 15px;
   background: transparent;
   transition: all 0.2s;
-  text-decoration: none; /* Removes underline from <a> */
-  margin-top: 2rem; /* Spacing from the image */
+  text-decoration: none;
+  margin-top: 2rem;
+  
+  /* ADDED: Ensure button has a stacking context to sit above images */
+  position: relative; 
+  z-index: 10; 
 }
 
 .btn-glitch .text,
@@ -80,4 +84,17 @@
 
 @keyframes blink-anim {
   50% { opacity: 0; }
+}
+
+/* --- MOBILE FIXES --- */
+@media screen and (max-width: 768px) {
+  .btn-glitch {
+    display: table; /* Helps with centering fit-content elements */
+    margin: 1.5rem auto; /* Center horizontally and adjust top spacing */
+    left: 0;
+    right: 0;
+    /* Ensure it doesn't overflow small screens */
+    max-width: 90%;
+    text-align: center;
+  }
 }

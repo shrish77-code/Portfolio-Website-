@@ -12,3 +12,20 @@ body {
   padding: 0;
   background-color: #000;
 }
+:root {
+  --padding-inline: 20px; /* Standard mobile padding */
+}
+img, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--padding-inline);
+}
+@media (min-width: 768px) {
+  :root {
+    --padding-inline: 40px;
+  }
+}

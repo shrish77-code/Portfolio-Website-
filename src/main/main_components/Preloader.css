@@ -5,9 +5,12 @@
   top: 0;
   left: 0;
   width: 100%;
+  /* Fallback for older browsers */
   height: 100vh;
+  /* Fix for mobile browsers (ignores address bar resize jumps) */
+  height: 100dvh; 
   background-color: #000;
-  z-index: 99999; /* Always on top */
+  z-index: 99999;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +18,6 @@
   transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
 }
 
-/* The Exit Animation: Slide up and Fade */
 .preloader-container.loaded {
   transform: translateY(-100%);
   opacity: 0;
@@ -24,19 +26,25 @@
 
 /* --- ICON WRAPPER --- */
 .loader-icon-wrapper {
-  margin-bottom: 2rem;
-  color: #EE344A; /* Theme Red */
+  margin-bottom: 1.5rem; /* Reduced slightly for better mobile stacking */
+  color: #EE344A;
   animation: pulse 2s infinite ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hourglass-svg {
-  width: 50px;
-  height: 50px;
+  width: 60px;  /* Default Size */
+  height: 60px;
   fill: none;
   stroke: #EE344A;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  /* Ensure the SVG scales nicely */
+  max-width: 100%; 
+  display: block;
 }
 
 /* Rotate the hourglass */
@@ -63,4 +71,20 @@
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 480px) {
+  .hourglass-svg {
+    width: 45px;  /* Smaller icon on phones */
+    height: 45px;
+  }
+
+  .loader-text {
+    font-size: 1.2rem; /* Smaller text on phones */
+  }
+
+  .loader-icon-wrapper {
+    margin-bottom: 1rem;
+  }
 }

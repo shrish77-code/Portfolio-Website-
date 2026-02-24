@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react';
 import PixelTransition from './PixelTransition';
 import './About.css';
 import ContactButton from './ContactButton';
-import profileImg from './shrish-pic-1.jpeg'; // Your image
+import profileImg from './shrish-pic-1.jpeg'; 
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,10 +17,9 @@ const About = () => {
   const introRef = useRef(null);
   const bridgeRef = useRef(null);
   
-  // New Refs for Entrance Animation
   const leftColRef = useRef(null);
   const rightColRef = useRef(null);
-  const pixelRef = useRef(null); // To control the pixel effect
+  const pixelRef = useRef(null); 
 
   const frameCount = 240; 
   const images = useRef([]);
@@ -52,6 +51,7 @@ const About = () => {
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Cover logic (similar to CSS object-fit: cover)
     const hRatio = canvas.width / img.width;
     const vRatio = canvas.height / img.height;
     const ratio = Math.max(hRatio, vRatio);
@@ -66,72 +66,78 @@ const About = () => {
     );
   };
 
-  // 3. MAIN ANIMATION
+  // 3. MAIN ANIMATION WITH RESPONSIVE LOGIC
   useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=8000",
-        pin: true,
-        scrub: 1, 
-      }
+    const mm = gsap.matchMedia();
+    
+    // Define the animation steps regardless of screen size
+    const createTimeline = (scrollEnd) => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: scrollEnd, // Dynamic End Value
+          pin: true,
+          scrub: 1, 
+        }
+      });
+
+      // --- PHASE 1: SCROLLYTELLING SEQUENCE ---
+      tl.to(introRef.current, { opacity: 1, duration: 1 })
+        .to(introRef.current, { opacity: 0, duration: 1 }, "+=0.5")
+        .to(bridgeRef.current, { opacity: 1, duration: 1 })
+        .to(bridgeRef.current, { opacity: 0, duration: 1 }, "+=0.5")
+        .to(frames, {
+          current: frameCount - 1,
+          snap: "current",
+          ease: "none",
+          duration: 6,
+          onUpdate: () => render()
+        }, "-=0.5")
+        
+        // --- PHASE 2: REVEAL CONTENT ---
+        .to(contentRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          onStart: () => {
+              gsap.fromTo(leftColRef.current, 
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+              );
+              gsap.fromTo(rightColRef.current, 
+                { x: 50, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 }
+              );
+          }
+        }, ">-1");
+
+      return tl;
+    };
+
+    // --- DESKTOP: Long Scroll (8000px) ---
+    mm.add("(min-width: 800px)", () => {
+      createTimeline("+=8000");
     });
 
-    // --- PHASE 1: SCROLLYTELLING SEQUENCE ---
-    tl.to(introRef.current, { opacity: 1, duration: 1 })
-      .to(introRef.current, { opacity: 0, duration: 1 }, "+=0.5")
-      .to(bridgeRef.current, { opacity: 1, duration: 1 })
-      .to(bridgeRef.current, { opacity: 0, duration: 1 }, "+=0.5")
-      .to(frames, {
-        current: frameCount - 1,
-        snap: "current",
-        ease: "none",
-        duration: 6,
-        onUpdate: () => render()
-      }, "-=0.5")
-      
-      // --- PHASE 2: REVEAL CONTENT ---
-      .to(contentRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        // When content appears, trigger the entrance animations below
-        onStart: () => {
-             // Animate Text from Bottom to Up
-             gsap.fromTo(leftColRef.current, 
-               { y: 100, opacity: 0 },
-               { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
-             );
-
-             // Animate Image from Right to Left
-             gsap.fromTo(rightColRef.current, 
-               { x: 100, opacity: 0 },
-               { x: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 }
-             );
-        }
-      }, ">-1");
-
+    // --- MOBILE: Shorter Scroll (3500px) ---
+    // Makes the animation feel faster and less stuck
+    mm.add("(max-width: 799px)", () => {
+      createTimeline("+=3500");
+    });
 
     // --- PHASE 3: PIXEL EFFECT ON SCROLL ---
-    // This separate trigger watches specifically when the "About Content" is fully visible
     ScrollTrigger.create({
       trigger: contentRef.current,
-      start: "top center", // When content hits center of screen
-      onEnter: () => {
-         // Play pixel effect when scrolling down into view
-         if(pixelRef.current) pixelRef.current.triggerAnimation(true);
-      },
-      onLeaveBack: () => {
-         // Play pixel effect when scrolling back up
-         if(pixelRef.current) pixelRef.current.triggerAnimation(false);
-      }
+      start: "top center", 
+      onEnter: () => pixelRef.current?.triggerAnimation(true),
+      onLeaveBack: () => pixelRef.current?.triggerAnimation(false)
     });
 
   }, { scope: containerRef });
 
-  // 4. RESIZE
+  // 4. RESIZE HANDLER
   useEffect(() => {
     const handleResize = () => {
       if (canvasRef.current) {
@@ -154,7 +160,7 @@ const About = () => {
 
       <div ref={contentRef} className="about-content-wrapper">
         
-        {/* LEFT COLUMN: Text (Slides Up) */}
+        {/* LEFT COLUMN: Text */}
         <div className="about-left" ref={leftColRef}>
           <span className="about-label">// 01. WHO AM I</span>
           <h2 className="about-headline">
@@ -168,38 +174,38 @@ const About = () => {
           </p>
         </div>
 
-        {/* RIGHT COLUMN: Image (Slides Left + Pixels) */}
+        {/* RIGHT COLUMN: Image */}
         <div className="about-right" ref={rightColRef}>
-           <PixelTransition
-              ref={pixelRef} // Attach Ref so we can control it
-              gridSize={12} 
-              pixelColor="#EE344A"
-              // ADDED: BorderRadius for rounded edges
-              style={{ width: '100%', height: '500px', maxWidth: '400px', borderRadius: '15px' }}
-              firstContent={
-                <img
-                  src={profileImg}
-                  alt="Shrish"
-                  // ADDED: borderRadius here too to match container
-                  style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: '15px' }} 
-                />
-              }
-              secondContent={
-                <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%", textAlign: 'center' }}>
-                  <p style={{ 
-                      fontFamily: 'Clash Display', 
-                      fontWeight: 700, 
-                      fontSize: "1.8rem", 
-                      color: "#ffffff",
-                      textTransform: "uppercase",
-                      lineHeight: "1.2"
-                  }}>
-                    Heyy! <br/> lets Connect.
-                  </p>
-                </div>
-              }
-            />
-            <ContactButton />
+           <div style={{ width: '100%', height: 'auto', aspectRatio: '4/5' }}>
+             <PixelTransition
+                ref={pixelRef} 
+                gridSize={12} 
+                pixelColor="#EE344A"
+                style={{ width: '100%', height: '100%', borderRadius: '15px' }}
+                firstContent={
+                  <img
+                    src={profileImg}
+                    alt="Shrish"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: '15px' }} 
+                  />
+                }
+                secondContent={
+                  <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%", textAlign: 'center' }}>
+                    <p style={{ 
+                        fontFamily: 'Clash Display', 
+                        fontWeight: 700, 
+                        fontSize: "1.5rem", 
+                        color: "#ffffff",
+                        textTransform: "uppercase",
+                        lineHeight: "1.2"
+                    }}>
+                      Heyy! <br/> lets Connect.
+                    </p>
+                  </div>
+                }
+              />
+           </div>
+           <ContactButton />
         </div>
 
       </div>

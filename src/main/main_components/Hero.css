@@ -368,3 +368,103 @@
   -webkit-text-stroke: 1px #fff;
   font-weight: 700; /* Ensure the outline is thick enough */
 }
+/* --- MOBILE RESPONSIVENESS & MENU --- */
+
+/* 1. Mobile Menu Button (Hidden on Desktop) */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFF;
+  font-family: 'Space Mono', monospace;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 100; /* Above everything */
+}
+
+/* 2. Mobile Menu Overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 3. Helper Class to hide Desktop Nav on Mobile */
+.desktop-nav {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- MOBILE LAYOUT ADJUSTMENTS --- */
+@media (max-width: 768px) {
+  
+  /* Fix Height for Mobile Browsers (Address bar fix) */
+  .hero-container {
+    height: 100dvh; 
+    min-height: 600px; /* Prevent squishing on landscape */
+  }
+
+  .hero-content {
+    padding: 1.5rem 1.2rem;
+    justify-content: space-between;
+  }
+
+  /* Header adjustments */
+  .hero-header {
+    align-items: center;
+  }
+
+  /* Hide Desktop Nav, Show Mobile Button */
+  .desktop-nav { display: none; }
+  .mobile-menu-btn { display: block; }
+
+  /* Stack the Grid Section */
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin: 1rem 0; /* Reduce vertical space */
+  }
+
+  .grid-desc {
+    width: 100%;
+  }
+
+  /* Shrink the Big Headline */
+  .hero-headline {
+    font-size: 2.8rem; /* Much smaller than 5rem to fit screen */
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .reveal-container {
+    display: inline-block; /* Helps text wrap naturally if needed */
+  }
+
+  /* Adjust Bottom Footer */
+  .hero-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.65rem;
+    padding-top: 1rem;
+  }
+}

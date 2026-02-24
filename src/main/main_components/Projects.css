@@ -222,3 +222,69 @@
 @keyframes fadeIn {
   to { opacity: 1; }
 }
+
+/* src/main/main_components/Projects.css */
+
+/* ... (Keep your existing desktop styles) ... */
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 900px) {
+  .projects-container {
+    flex-direction: column;
+    height: auto;       /* Allow container to grow with content */
+    min-height: 100dvh; /* Minimum full screen height */
+    overflow-y: auto;   /* Enable scrolling inside if needed */
+  }
+
+  /* 1. VISUALS (Top Section) */
+  .projects-left {
+    width: 100%;
+    height: 40vh; /* Takes top 40% of screen */
+    min-height: 300px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Adjust Marquee for smaller screens */
+  .marquee-wrapper {
+    top: 25%;
+  }
+
+  .marquee-item {
+    font-size: 2.5rem; /* Smaller pixel text */
+    margin-right: 1rem;
+  }
+
+  /* 2. PROJECT GRID (Bottom Section) */
+  .projects-right {
+    width: 100%;
+    height: auto;
+    padding: 3rem 1.5rem;
+    display: block; /* Remove flex centering to let grid flow */
+  }
+
+  .section-header-red {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* 3. GRID LAYOUT: 1 Column on Mobile */
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    gap: 2rem;
+  }
+
+  .grid-card {
+    width: 100%;
+    /* Force 16:9 aspect ratio for video cards */
+    aspect-ratio: 16 / 9; 
+    height: auto;
+    /* Reset initial transforms so they are visible immediately or use simpler animation */
+    transform: none;
+    opacity: 1;
+    animation: none; /* Optional: disable entrance animation on mobile for performance */
+  }
+}

@@ -123,3 +123,61 @@
     font-size: 2.5rem;
   }
 }
+/* src/main/main_components/Skills.css */
+
+/* ... (Keep all your existing desktop styles above) ... */
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 900px) {
+  .skills-container {
+    flex-direction: column;
+    /* Use dynamic viewport height for mobile browsers */
+    height: 100dvh; 
+  }
+
+  /* 1. Animation moves to top (smaller) */
+  .skills-left {
+    width: 100%;
+    height: 35vh; /* 35% Height for the dragon/robot */
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* 2. Content moves to bottom (larger) */
+  .skills-right {
+    width: 100%;
+    height: 65vh; /* 65% Height for text */
+    padding: 1.5rem 2rem;
+    align-items: flex-start; /* Align closer to top of section */
+  }
+
+  .skills-content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Ensure slides don't overlap awkwardly */
+    position: relative; 
+  }
+
+  /* 3. Typography Adjustments */
+  .skills-heading {
+    font-size: 2.2rem; /* Shrink from 3.5rem */
+    margin-bottom: 1.5rem;
+  }
+
+  .skills-label {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* 4. Tech Pills adjustments for touch targets */
+  .tech-grid {
+    gap: 8px;
+  }
+
+  .tech-pill {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+}

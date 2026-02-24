@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react'; // Import useState
 import ParticleEffect from './ParticleEffect'; 
 import './Hero.css';
 import MusicToggle from './MusicToggle';
 import NavButtons from './NavButtons';
+
 const Hero = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <section className="hero-container">
       
@@ -25,12 +28,32 @@ const Hero = () => {
             </div>
           </div>
 
-          <nav className="hero-nav">
-            <ul className="flex gap-8 md:gap-12"> {/* Ensure flex is here if using tailwind for layout, or rely on css */}
+          {/* Desktop Navigation */}
+          <nav className="hero-nav desktop-nav">
+            <ul className="flex gap-8 md:gap-12">
               <NavButtons />
-              </ul>
+            </ul>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="mobile-menu-btn" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? "CLOSE [X]" : "MENU ="}
+          </button>
         </header>
+
+        {/* --- MOBILE MENU OVERLAY --- */}
+        {isMobileMenuOpen && (
+          <div className="mobile-nav-overlay">
+             {/* Reusing your NavButtons component inside the overlay */}
+             <div onClick={() => setIsMobileMenuOpen(false)}>
+                <NavButtons />
+             </div>
+             <MusicToggle />
+          </div>
+        )}
 
         {/* --- MIDDLE GRID --- */}
         <div className="hero-grid">
@@ -41,7 +64,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* --- BOTTOM HERO TEXT (UPDATED WITH ANIMATION) --- */}
+        {/* --- BOTTOM HERO TEXT --- */}
         <div className="hero-bottom">
           <div className="hero-headline">
             {/* Line 1 */}
@@ -76,9 +99,12 @@ const Hero = () => {
                 </div>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '5px' }}>
+          
+          {/* Hide Music Toggle here on mobile since it's in the menu */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '5px' }} className="desktop-nav">
              <MusicToggle />
           </div>
+
           <div className="hero-footer">
             <p>Open to freelance, contract or full-time... <span className="highlight">Schedule a call</span></p>
             <p>6 full cases • 76 archive fragments</p>
